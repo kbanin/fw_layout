@@ -11,17 +11,8 @@
     <title>DEFAULT|<?=$title?></title>
   </head>
   <body>
-
-  <div class ="container">
-
-  <ul class ="nav nav-pills">
-  <li><a href ="page/about"> About</a></li>
-     <? if(!empty($menu)):?>
-<? foreach ($menu as $item):   ?>
-        <li><a href ="category/<?=$item['id'] ?>"><?=$item['title']?></a></li>
-<? endforeach;?>
- </ul>
- <? endif;?>
+  Здесь меню не будет!
+  
     <h1>Главная страница</h1>
 
     <?=$content?>
@@ -29,7 +20,7 @@
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    </div>
+   
     <script src="/bootstrap/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
