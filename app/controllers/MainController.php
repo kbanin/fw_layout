@@ -1,62 +1,35 @@
 <?
+
 namespace app\controllers;
 
 use app\models\Main;
+use vendor\core\App;
+use vendor\core\base\View;
+
+class MainController extends AppController
+{
 
 
-
-class MainController extends AppController{
-
-  
-// public $layout = 'main';
+    // public $layout = 'main';
 
 
 
     public function indexAction()
     {
-    $model = new Main();   
-    $posts = \R::findAll('posts');
-    $menu = \R::findAll('category');
-     $title = 'PAGE TITLE';
-    $this->set(compact ('title','posts','menu'));
-       
-       
+
+        // App::$app->getList();
+        $model = new Main();
+        $posts = \R::findAll('posts');
+        $menu = \R::findAll('category');
+        $title = 'PAGE TITLE';
+        View::setMeta('Главная страница','Описание страницы','Ключевые слова');
+        $this->set(compact('title', 'posts', 'menu'));
     }
-    
-    
-    public function testAction (){
 
-     $this->layout = 'test';
 
+    public function testAction()
+    {
+
+        $this->layout = 'test';
     }
-    
-    
-
-
-
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>

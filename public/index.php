@@ -1,5 +1,6 @@
 <?
 
+use vendor\core\App;
 use vendor\core\Router;
 
 
@@ -11,6 +12,7 @@ define('CORE', dirname(__DIR__) . '/vendor/core');
 define('ROOT', dirname(__DIR__));
 define('LIBS', dirname(__DIR__). '/vendor/libs');
 define('APP', dirname(__DIR__) . '/app');
+define('CACHE', dirname(__DIR__) . '/tmp/cache');
 define('LAYOUT','default');
 
 
@@ -29,6 +31,8 @@ spl_autoload_register(function ($class) {
         require_once $file;
     }
 });
+
+new \vendor\core\App;
 
 Router::add('^page/(?P<action>[a-z-]+)/(?P<alias>[a-z-]+)$', ['controller' => 'Page']);
 Router::add('^page/(?P<alias>[a-z-]+)$', ['controller' => 'Page','action'=>'view']);

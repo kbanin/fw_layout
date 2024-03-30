@@ -1,0 +1,31 @@
+<?
+
+namespace classes;
+
+
+class Cache {
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+?>
