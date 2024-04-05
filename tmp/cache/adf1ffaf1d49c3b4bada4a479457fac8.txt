@@ -1,0 +1,16 @@
+a:2:{s:4:"data";s:823:"<option value="685">Комплектующие к Apple</option>
+<option value="691">&nbsp;-Запчасти Ipad</option>
+<option value="695">&nbsp;&nbsp;--Ipad</option>
+<option value="696">&nbsp;&nbsp;--Ipad 2</option>
+<option value="697">&nbsp;&nbsp;--Ipad NEW(Ipad 3)</option>
+<option value="698">&nbsp;&nbsp;--Ipad 4</option>
+<option value="699">&nbsp;&nbsp;--Ipad mini</option>
+<option value="692">&nbsp;-Запчасти Iphone</option>
+<option value="700">&nbsp;&nbsp;--Iphone</option>
+<option value="701">&nbsp;&nbsp;--Iphone 3G/3Gs</option>
+<option value="702">&nbsp;&nbsp;--Iphone 4</option>
+<option value="703">&nbsp;&nbsp;--Iphone 4S</option>
+<option value="704">&nbsp;&nbsp;--Iphone 5</option>
+<option value="693">&nbsp;-Запчасти Ipod</option>
+<option value="694">&nbsp;-Запчасти MAC</option>
+";s:8:"end_time";i:1712329752;}
