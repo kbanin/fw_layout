@@ -58,8 +58,11 @@ class View
 
         (extract($vars));
         $file_view = APP . str_replace('\\','/',"/views/{$this->route['prefix']}{$this->route['controller']}/{$this->view}.php");
-        ob_start([$this,'compressPage']);
 
+        // ob_start([$this,'compressPage']);
+
+
+     ob_start();
 
 
         if (is_file($file_view)) {
@@ -98,4 +101,18 @@ class View
      <meta name="description" content="'.self::$meta['desc'].'">
      <meta name="keywords" content="'.self::$meta['keywords'].'">';
     }
-}
+
+    public function getPart ($file)
+{
+     $file = APP."/views/{$file}.php";
+     if (is_file($file)){
+
+        require_once $file;
+     }else{
+        echo "File $file not found....";
+     }
+
+
+}        
+    }
+

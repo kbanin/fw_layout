@@ -1,4 +1,37 @@
-<?
+<?if(!empty($posts)):?>
+<? foreach ($posts as $post):?>
+  
+ <h1><?=$post->title?></h1>
+   <p class="lead mx-auto desc mb-5"><?=$post->text?></p>
+   <? endforeach?>
+
+
+
+<? else:?>
+<h3>Posts not found</h3>
+<? endif?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <?
 
 use fw\widjets\menu\Menu;
 
@@ -22,7 +55,7 @@ use fw\widjets\menu\Menu;
 
 
 <?endforeach;?>
-
+ -->
 
 
 
