@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить отзыв | Платформа Отзывов</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<!-- Шапка с навигацией и поиском -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Платформа Отзывов</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="index.html">Главная</a>
+            <a class="nav-item nav-link" href="register.html">Регистрация</a>
+            <a class="nav-item nav-link" href="login.html">Вход</a>
+            <a class="nav-item nav-link" href="add_review.html">Добавить отзыв</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Контент страницы -->
+<div class="container mt-5">
+    <h2>Добавить отзыв</h2>
+    <form>
+        <div class="form-group">
+            <label for="productName">Название продукта</label>
+            <input type="text" class="form-control" id="productName" placeholder="Введите название продукта">
+        </div>
+        <div class="form-group">
+            <label>Рейтинг</label>
+            <div>
+                <!-- Радио-кнопки для рейтинга -->
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ratingOptions" id="rating1" value="1">
+                    <label class="form-check-label" for="rating1">1</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ratingOptions" id="rating2" value="1">
+                    <label class="form-check-label" for="rating1">2</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ratingOptions" id="rating3" value="1">
+                    <label class="form-check-label" for="rating1">3</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ratingOptions" id="rating4" value="1">
+                    <label class="form-check-label" for="rating1">4</label>
+                </div>
+                <!-- Повторять для значения рейтинга от 1 до 5 -->
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ratingOptions" id="rating5" value="5">
+                    <label class="form-check-label" for="rating5">5</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="reviewText">Отзыв</label>
+            <textarea class="form-control" id="reviewText" rows="3" placeholder="Введите ваш отзыв"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>
+
+<!-- Подключение Bootstrap JS и зависимостей -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

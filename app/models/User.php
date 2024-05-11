@@ -10,10 +10,11 @@ class User extends Model
 
      public $attributes = [
 
-          'login' => '',
-          'password' => '',
-          'email' => '',
           'name' => '',
+          'email' => '',
+          'password' => '',
+
+
 
      ];
 
@@ -21,10 +22,12 @@ class User extends Model
      public $rules = [
 
           'required' => [
-               ['login'],
-               ['password'],
-               ['email'],
                ['name'],
+               ['email'],
+               ['password'],
+               
+
+
 
           ],
           'email' => [
@@ -40,11 +43,9 @@ class User extends Model
      public function checkUnique()
      {
 
-          $user = \R::findOne('user', 'login=? OR email = ? LIMIT 1', [$this->attributes['login'], $this->attributes['email']]);
+          $user = \R::findOne('users', 'email = ? LIMIT 1', [$this->attributes['email']]);
           if ($user) {
-               if ($user->login == $this->attributes['login']) {
-                    $this->errors['unique'][] = 'Этот логин уже занят';
-               }
+
                if ($user->email == $this->attributes['email']) {
                     $this->errors['unique'][] = 'Этот email уже занят';
                }
@@ -54,42 +55,24 @@ class User extends Model
      }
 
 
-     public function login($isAdmin=false)
+     public function login()
      {
 
-          $login = !empty(trim($_POST['login'])) ? trim($_POST['login']) : null;
+          $name = !empty(trim($_POST['name'])) ? trim($_POST['name']) : null;
           $password = !empty(trim($_POST['password'])) ? trim($_POST['password']) : null;
+          if ($name && $password) {
 
-          if ($login && $password) {
-               if($isAdmin){
-                    $user = \R::findOne('user', "login=? AND role= 'admin' LIMIT 1", [$login]);
-
-               }else{
-                    $user = \R::findOne('user', 'login=? LIMIT 1', [$login]);
-
-               }
+               $user = \R::findOne('users', "name=? OR email=?  LIMIT 1 ", [$name, $name]);
                if ($user) {
-
                     if (password_verify($password, $user->password)) {
-                         foreach ($user as $k=>$v){
-                              if($k != 'passworrd')$_SESSION ['user'][$k]=$v;
-
+                         foreach ($user as $k => $v) {
+                              if ($k != 'password')  $_SESSION['user'][$k] = $v;
                          }
                          return true;
                     }
-                    
                }
           }
 
           return false;
      }
-
-public static function isAdmin (){
-
-return (isset ($_SESSION['user']) && $_SESSION ['user']['role']=='admin');
-
-}
-
-
-
 }

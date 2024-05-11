@@ -14,7 +14,7 @@ define('ROOT', dirname(__DIR__));
 define('LIBS', dirname(__DIR__). '/vendor/fw/libs');
 define('APP', dirname(__DIR__) . '/app');
 define('CACHE', dirname(__DIR__) . '/tmp/cache');
-define('LAYOUT','stamina');
+define('LAYOUT','otzovik');
 define('ADMIN','http://fw.loc/admin');
 
 
@@ -52,7 +52,11 @@ Router::add('^admin/?(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?$',['prefix'=>
 
 
 Router::add('^$', ['controller' => 'Main', 'action' => 'index']);
+Router::add('^signup$', ['controller' => 'User', 'action' => 'signup']);
+Router::add('^login$', ['controller' => 'User', 'action' => 'login']);
 Router::add('^(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?$');
+
+
 
 
 

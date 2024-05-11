@@ -30,7 +30,7 @@ class UserController extends AppController
   public function loginAction()
   {
 
-
+    
     if (!empty($_POST)) {
 
       $user = new User();

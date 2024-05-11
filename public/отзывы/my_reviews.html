@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои отзывы | Платформа Отзывов</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Подключение иконок Bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+<!-- Шапка с навигацией и поиском -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Платформа Отзывов</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="index.html">Главная</a>
+            <a class="nav-item nav-link" href="add_review.html">Добавить отзыв</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Контент страницы -->
+<div class="container mt-5">
+    <h2>Мои отзывы</h2>
+    <div class="mb-4">
+        <a href="add_review.html" class="btn btn-success">Добавить новый отзыв</a>
+    </div>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Продукт</th>
+            <th scope="col">Отзыв</th>
+            <th scope="col">Рейтинг</th>
+            <th scope="col">Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Пример отзыва -->
+        <tr>
+            <th scope="row">1</th>
+            <td>Название продукта</td>
+            <td>Текст отзыва</td>
+            <td>★★★★☆</td>
+            <td>
+                <a href="update_review.html" class="text-primary"><i class="fas fa-edit"></i></a>
+                <a href="#" class="text-danger"><i class="fas fa-trash-alt"></i></a>
+            </td>
+        </tr>
+        <!-- Добавить другие отзывы -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Подключение Bootstrap JS и зависимостей -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

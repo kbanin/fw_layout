@@ -10,8 +10,9 @@
             "port": 3306,
             "driver": "MySQL",
             "name": "bkn",
+            "username": "bkn",
             "database": "fw",
-            "username": "bkn"
+            "askForPassword": true
         }
     ]
 }

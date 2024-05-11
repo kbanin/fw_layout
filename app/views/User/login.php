@@ -1,33 +1,28 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход | Платформа Отзывов</title>
+    <!-- Подключение Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <title>Log in</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Вход</h1>
-        <form method="POST" action="/user/login">
-            <div class="form-group">
-                <label for="login">Логин</label>
-                <input type="text" class="form-control" id="login" name="login" placeholder="Введите логин" >
-            </div>
-            <div class="form-group">
-                <label for="password">Пароль</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Введите пароль">
-            </div>
-           
-            <button type="submit" class="btn btn-primary">Вход</button>
-        </form>
-     
-    </div>
+ 
+<!-- Контент страницы -->
+<div class="container mt-5">
+    <h2>Вход</h2>
+    <form method="POST" action="/user/login">
+        <div class="form-group">
+            <label for="usernameInput">Имя пользователя или Email</label>
+            <input type="text" class="form-control" name="name" id="usernameInput" placeholder="Введите имя пользователя или email">
+        </div>
+        <div class="form-group">
+            <label for="passwordInput">Пароль</label>
+            <input type="password" class="form-control" name = "password" id="passwordInput" placeholder="Пароль">
+        </div>
+        <button type="submit" class="btn btn-primary">Войти</button>
+    </form>
+</div>
 
-   
-</body>
-</html>
+

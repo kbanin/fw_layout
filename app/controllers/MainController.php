@@ -8,12 +8,14 @@ use Monolog\Logger;
 use app\models\Main;
 use fw\core\base\View;
 use app\controllers\AppController;
+use fw\libs\Pagination;
 use Monolog\Handler\StreamHandler;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class MainController extends AppController
 {
-
+    public $products;
+    public $services;
 
     // public $layout = 'main';
 
@@ -21,36 +23,76 @@ class MainController extends AppController
 
     public function indexAction()
     {
-        date_default_timezone_set('Europe/Moscow');
 
-        // create a log channel
-$log = new Logger('name');
-$log->pushHandler(new StreamHandler(ROOT .'/tmp/your.log', Level::Warning));
-
-// add records to the log
-$log->warning('Foo');
-$log->error('Bar');
-
-$mail = new PHPMailer(true);
-
-
-
-        // App::$app->getList();
         $model = new Main();
+        $total = \R::count('products');
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+        $perpage = 5;
+        $pagination = new Pagination($page, $perpage, $total);
+
+
+        $start = $pagination->getStart();
+        $products = \R::findAll('products', "LIMIT $start, $perpage ");
+        $services = \R::findAll('services', "LIMIT $start, $perpage ");
+         
+
+      
+        $productData = $model->getData($products,'product_id');
+
         
-        $posts = \R::findAll('posts');
-        $menu = \R::findAll('category');
-     
+        $serviceData = $model->getData($services,'service_id');
+
 
         $title = 'PAGE TITLE';
-        View::setMeta('Главная страница','Описание страницы','Ключевые слова');
-        $this->set(compact('title', 'posts', 'menu'));
+        View::setMeta('Главная страница', 'Описание страницы', 'Ключевые слова');
+        $this->set(compact('title', 'products', 'services','pagination', 'total','productData','serviceData'));
     }
+
+
+    public function searchAction()
+    {
+
+        $this->layout = 'test';
+    }
+
 
 
     public function testAction()
     {
+        if ($this->isAjax()) {
 
-        $this->layout = 'test';
+
+
+            $model = new Main();
+            $total = \R::count('products');
+
+            $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;;
+            $perpage = 5;
+            $pagination = new Pagination($page, $perpage, $total);
+
+
+            $start = $pagination->getStart();
+            $products = \R::findAll('products', "LIMIT $start, $perpage ");
+            $services = \R::findAll('services', "LIMIT $start, $perpage ");
+
+            
+            $productData = $model->getData($products,'product_id');
+
+            
+            $serviceData = $model->getData($services,'service_id');
+
+
+            
+
+            $head = '<h2>Продукты и Услуги</h2>';
+
+            $this->loadView('index', compact('head', 'products', 'services', 'pagination','productData','serviceData'));
+
+            die;
+        }
+
+
+        echo 222;
     }
 }

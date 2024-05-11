@@ -12,6 +12,7 @@ class View
     public $view;
     public $layout;
     public static $meta = ['title'=>'','desc'=>'','keywords'=>''];
+    public $scripts = [];
 
     public function __construct($route, $layout = '', $view = '')
     {
@@ -59,7 +60,7 @@ class View
         (extract($vars));
         $file_view = APP . str_replace('\\','/',"/views/{$this->route['prefix']}{$this->route['controller']}/{$this->view}.php");
 
-        // ob_start([$this,'compressPage']);
+        //ob_start([$this,'compressPage']);
 
 
      ob_start();
@@ -70,13 +71,20 @@ class View
             require $file_view;
         } else {
 
-            echo "<p><Не найден вид <b>$file_view</b></p>";
+            echo "<p>Не найден вид <b>$file_view</b></p>";
         }
         $content = ob_get_contents();
         ob_clean();
 
         $file_layout = APP . "/views/layouts/{$this->layout}.php";
         if (is_file($file_layout)) {
+            $content = $this->getScripts($content);
+            $scripts =[];
+            if(!empty($this->scripts[0])){
+                $scripts = $this->scripts[0];
+               
+            }
+                      
             require $file_layout;
         } else {
             echo "<p>Не найден  шаблон <b>$file_layout</b></p>";
@@ -97,7 +105,7 @@ class View
     
     public static function getMeta ()
     {
-      echo '<title>'.self::$meta['title'].'</title>    
+     echo '<title>'.self::$meta['title']."|Платформа отзывов".'</title>    
      <meta name="description" content="'.self::$meta['desc'].'">
      <meta name="keywords" content="'.self::$meta['keywords'].'">';
     }
@@ -113,6 +121,18 @@ class View
      }
 
 
-}        
+}    
+
+
+protected function getScripts ($content){
+    $pattern = "#<script.*?></script>#i";
+    preg_match_all($pattern,$content,$this->scripts);
+    if(!empty($this->scripts)){
+        $content = preg_replace($pattern,'',$content);
+    }
+
+    return $content;
+}
+
     }
 
