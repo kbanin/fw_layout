@@ -14,7 +14,7 @@ define('ROOT', dirname(__DIR__));
 define('LIBS', dirname(__DIR__). '/vendor/fw/libs');
 define('APP', dirname(__DIR__) . '/app');
 define('CACHE', dirname(__DIR__) . '/tmp/cache');
-define('LAYOUT','otzovik');
+define('LAYOUT','cripto');
 define('ADMIN','http://fw.loc/admin');
 
 
