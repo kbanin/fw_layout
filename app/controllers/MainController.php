@@ -20,24 +20,48 @@ class MainController extends AppController
 
     public function indexAction()
     {  
-
-
-        $xmlFile = ROOT.'/public/rss_crypto2.xml';
         
-      
-        $xml = simplexml_load_file($xmlFile );
+$version = curl_version();
+debug($version);
+// Установка URL-адреса API
+$url = 'https://api.coingecko.com/api/v3/ping';
 
+// Установка заголовка или параметра строки запроса с ключом API
+$headers = [
+    'x-cg-demo-api-key:CG-jm2TWrhNHdoGKeNZDnjYSrfg', // Заголовок
+    // 'x_cg_demo_api_key' => 'YOUR_API_KEY', // Параметр строки запроса
+];
 
+// Создание нового cURL ресурса
+$curl = curl_init();
 
-      
-        debug($xml );
+// Установка опций cURL
+curl_setopt($curl, CURLOPT_URL, $url);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
+// Выполнение запроса
+$response = curl_exec($curl);
+debug($response );
 
+// Проверка наличия ошибок
+if ($response === false) {
+    echo 'Ошибка выполнения запроса: ' . curl_error($curl);
+} else {
+    // Обработка ответа
+    $data = json_decode($response, true);
+    debug($data);
+    
+    if ($data['gecko_says'] === '(V3) To the Moon!') {
+        echo 'API CoinGecko работает!';
+    } else {
+        echo 'API CoinGecko не работает!';
+    }
+}
 
-        
-        // $title = 'PAGE TITLE';
-        // View::setMeta('Главная страница', 'Описание страницы', 'Ключевые слова');
-        // $this->set(compact('title'));
+// Закрытие cURL ресурса
+curl_close($curl);
+       
     }
 
 
