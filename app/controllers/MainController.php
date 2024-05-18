@@ -32,15 +32,27 @@ class MainController extends AppController
 
         $document = new Document();
         $document->loadHtml($html);
-        $сryptocurrencies = $document->find('');
+        $сryptocurrencies = $document->find('table[data-coin-table-target="table"] tbody[data-view-component="true"]
+        tr[data-view-component="true"] td[data-view-component="true"]:nth-child(3) a.tw-flex.tw-items-center.tw-w-full');
 
+    
+        
+         foreach ($сryptocurrencies as $coins){
+          
+         var_dump ($coins->attr('href'));  
+         var_dump($coins->find('div.tw-text-gray-700')[0]->text());
+         echo '<br>';
         
 
      
-       
+
+         }
+
+     
+     }
 
 
-    }
+    
 
 
 

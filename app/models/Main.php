@@ -23,10 +23,10 @@ class Main extends Model
 
 
         // Создание нового массива с обернутыми в одинарные кавычки словами
-        $topCrupto = array_map(function ($word) {
+        $topCripto = array_map(function ($word) {
             return "'$word'";
         }, $words);
-         return  $topCrupto;
+         return  $topCripto;
 
     }
 }
