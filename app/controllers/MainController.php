@@ -8,72 +8,45 @@ use Monolog\Logger;
 use app\models\Main;
 use fw\core\base\View;
 use app\controllers\AppController;
-use DiDom\Document;
 use fw\libs\Pagination;
 use Monolog\Handler\StreamHandler;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class MainController extends AppController
 {
-    
 
 
 
-    public function indexAction()
-    {
 
-        $crypto = new Main();
-        $topCrypto = $crypto->getCryptoArray();
+     public function indexAction()
+     {
+
         
-        $url = 'https://www.coingecko.com/?items=300';
-        $client = new \GuzzleHttp\Client();
-        $resp = $client->get($url);
-        $html = $resp->getBody()->getContents();
+        $url = 'https://coinspot.io/feed/';
+        $xml = simplexml_load_file($url);
+      //  debug($xml);
+       
+        foreach ($xml->channel->item as $item){
 
-        $document = new Document();
-        $document->loadHtml($html);
-        $сryptocurrencies = $document->find('table[data-coin-table-target="table"] tbody[data-view-component="true"]
-        tr[data-view-component="true"] td[data-view-component="true"]:nth-child(3) a.tw-flex.tw-items-center.tw-w-full');
+           debug  ((string)$title = $item->title);
+           debug ((string)$link = $item->link);
+           debug ((string)$date = $item->pubDate);
+           debug((string)$date = $item->description);
+           debug((string)$date = $item->content_encoded);
 
-    
-        
-         foreach ($сryptocurrencies as $coins){
           
-         var_dump ($coins->attr('href'));  
-         var_dump($coins->find('div.tw-text-gray-700')[0]->text());
-         echo '<br>';
+
+        }
         
-
-     
-
-         }
-
-     
      }
 
 
-    
 
+     public function searchAction()
+     {
+     }
 
-
-
-
-
-
-
-
-    public function searchAction()
-    {
-    }
-
-
-
-
-
-
-
-
-    public function testAction()
-    {
-    }
+     public function testAction()
+     {
+     }
 }
