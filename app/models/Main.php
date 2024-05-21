@@ -29,4 +29,6 @@ class Main extends Model
          return  $topCripto;
 
     }
+
+    
 }
