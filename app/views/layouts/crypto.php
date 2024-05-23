@@ -11,13 +11,17 @@
 </head>
 <body>
 <div class="container mt-5">
+<? $this->getPart('inc/search');?>
     
     <?=$content?>
     <div id="pagination" class="pagination">
         <!-- Пример кнопок пагинации -->
+        <!-- <? if ($pagination->countPages > 1) : ?>
+                        <?= $pagination ?> -->
         <button onclick="loadNews(1)" class="btn btn-sm btn-link">1</button>
         <button onclick="loadNews(2)" class="btn btn-sm btn-link">2</button>
         <button onclick="loadNews(3)" class="btn btn-sm btn-link">3</button>
+        <!-- <? endif ?> -->
     </div>
 </div>
 

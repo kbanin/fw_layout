@@ -11,7 +11,7 @@ class Pagination
     public $currentPage; //текущая сттраница
     public $perpage; //по сколько записей выводить на страницу
     public $total; //общее количество записей
-    public $countPages; //общее количество страниц на которые нужно будет выводить товары и услуги по 5 штук с каждой таблицы!
+    public $countPages; //общее количество страниц на которые нужно будет выводить новости!
     public $uri; // базовый адрес для страницы
 
 
@@ -37,7 +37,7 @@ class Pagination
         $pages = '';
         for ($i = 1; $i <= $this->countPages; $i++) {
             $isActive = $i == $this->currentPage ? 'style="text-decoration: underline;"' : '';
-            $pages .= "<li><a href='{$this->uri}data-page={$i}' {$isActive}>{$i}</a></li>&nbsp;&nbsp;";
+            $pages .= "<li><a href='{$this->uri}page={$i}' {$isActive}>{$i}</a></li>&nbsp;&nbsp;";
         }
         return '<ul class="pagination">' . $pages . '</ul>';
     }
@@ -45,7 +45,7 @@ class Pagination
     public function getCountPages()
     {
 
-        return ceil($this->total / $this->perpage) ?: 1; // Соответственно 25/5 = 5 т.е. 5 старниц необходимо
+        return ceil($this->total / $this->perpage) ?: 1; 
     }
 
     public function getCurrentPages($page)

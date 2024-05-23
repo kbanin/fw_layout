@@ -3,12 +3,12 @@
     <div class="text-center">
         <h2><strong>Новости о биткоин, блокчейне и криптовалютах</strong></h2>
     </div>
-    <? foreach ($titles as $index => $title) : ?>
+    <? foreach ($news as $item) : ?>
         <div class="news-item mb-3 p-2 border rounded">
-            <h4 class="news-title"><?= $title ?></h4>
-            <p class="news-description"><?= $dates[$index] ?></p>
-            <p class="news-description"><?= $descriptions[$index] ?></p>
-            <a href="<?= $links[$index] ?>" class="news-link">Читать полностью</a>
+            <h4 class="news-title"><?= $item->title ?></h4>
+            <p class="news-description"><?= $item->dates?></p>
+            <p class="news-description"><?= $item->description?></p>
+            <a href="<?=$item->links?>" class="news-link">Читать полностью</a>
         </div>
     <? endforeach ?>
 </div>
