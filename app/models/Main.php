@@ -11,15 +11,15 @@ class Main extends Model
     public $rssUrls = array(
         'https://coinspot.io/feed/',
         'https://ru.investing.com/rss/news_301.rss',
-        'https://cryptocurrency.tech/feed/', // ебёт мозг
+        'https://cryptocurrency.tech/feed/',
         'https://bits.media/rss2/',
         'https://cryptofeed.ru/feed/',
         'https://ru.beincrypto.com/feed/',
         'https://2bitcoins.ru/feed/',
-        'https://forklog.com/feed',// ебёт мозг
-        'https://www.coindesk.com/arc/outboundfeeds/rss/?_gl=1*1gmicje*_up*MQ..*_
-        ga*MjEzOTc3NjMwMC4xNzE2Mjk1MjYx*_ga_VM3STRYVN8*MTcxNjI5NTI2MS4xLjAuMTcxNjI5NTI2MS4wLjAuMTIyODIwMDQxMQ..',
+        'https://happycoin.club/feed/',
+        'https://altcoinlog.com/feed/',
         
+      
     );
 
     
