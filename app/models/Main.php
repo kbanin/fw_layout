@@ -18,6 +18,9 @@ class Main extends Model
         'https://2bitcoins.ru/feed/',
         'https://happycoin.club/feed/',
         'https://altcoinlog.com/feed/',
+        'https://decrypt.co/feed',
+        'https://dailyhodl.com/feed/',
+        
         
       
     );
@@ -72,5 +75,20 @@ public function updateDateToDatabase ($titles, $links, $dates, $descriptions){
 
 }
 
+ public function pagination ($page) {
 
+  $perpage = 25;
+  $total = \R::count('cryptonews');
+  $page_cnt = ceil( $total/$perpage);
+  
+  if($page<1){
+    $page = 1;
+  }
+if ($page>$page_cnt) $page = $page_cnt;
+    $start = ($page -1)*$perpage;
+
+    for($i=1;$i<$page_cnt;$i++){
+        echo "<a href='?page={$i}'>{$i}</a>";
+    }
+ }
 }

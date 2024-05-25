@@ -12,34 +12,35 @@ use fw\libs\Pagination;
 use Monolog\Handler\StreamHandler;
 use PHPMailer\PHPMailer\PHPMailer;
 
-class MainController extends AppController{
+class MainController extends AppController
+{
 
-   
+
 
    public function indexAction()
    {
-      
-     
-      
+
+
+
       $crypto = new Main;
-  
+
       $titles = [];
       $links = [];
       $dates = [];
       $descriptions = [];
 
 
-   //  Получение новостей из массива ссылок  RSS 
+      //  Получение новостей из массива ссылок  RSS 
       foreach ($crypto->rssUrls as $rssUrl) {
-      
+
          $rss = simplexml_load_file($rssUrl);
 
-        
-      
+
+
 
          foreach ($rss->channel->item as $item) {
 
-           
+
 
             (string)$title = $item->title;
             (string)$link = $item->link;
@@ -53,26 +54,33 @@ class MainController extends AppController{
             $descriptions[] = $description;
          }
       }
-     
-     
+
+
       //Сохранение данных новостей в БД таблицу cryptonews в случае добавление новой ссылки в массив rssUrls
-      
-      $currentCount = count($crypto->rssUrls);
-      $expectedCount = $currentCount + 1;
-     
-      if (count($titles) > 0 && count($titles) % $expectedCount === 0) {
-      $crypto->addDataToDatabase($titles,$links,$dates,$descriptions);}
-     
-   
 
-      //Обновление данных (скрипт запускается каждый 6 часов с использованием cron)
-      $crypto->updateDateToDatabase($titles,$links,$dates,$descriptions);
-     
+      $expectedCount = count($crypto->rssUrls);
+      $file = ROOT . '/count.txt';
+      $currentCount = file_exists($file) ? (int)file_get_contents($file) : 0; // начальное значение
       
+      
+      if ($expectedCount > $currentCount) {
+         \R::wipe('cryptonews');
+
+         $crypto->addDataToDatabase($titles, $links, $dates, $descriptions);
+         $currentCount = $expectedCount; // обновляем текущее значение
+         // Сохраняем текущее значение в файл
+         file_put_contents($file, $currentCount);
+      } else { //Обновление данных (скрипт запускается каждый 6 часов с использованием cron)
+         
+         $crypto->updateDateToDatabase($titles, $links, $dates, $descriptions);
+      }
+
+      $page = isset ($_GET['page']) ? (int)$_GET['page']:1;
+
       $news = \R::findAll('cryptonews');
-     
 
-   $this->set(compact('news'));
+
+      $this->set(compact('news'));
    }
 
 
