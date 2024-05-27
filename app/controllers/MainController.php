@@ -36,7 +36,7 @@ class MainController extends AppController
          $rss = simplexml_load_file($rssUrl);
 
 
-
+         
 
          foreach ($rss->channel->item as $item) {
 
@@ -75,12 +75,22 @@ class MainController extends AppController
          $crypto->updateDateToDatabase($titles, $links, $dates, $descriptions);
       }
 
+      $coins = $crypto->getCryptoArray();
+      
+      
+      $perpage = 25;
       $page = isset ($_GET['page']) ? (int)$_GET['page']:1;
+      $total= \R::count('cryptonews');
+      
+      $page_cnt = ceil( $total/$perpage);
+     
+      
 
-      $news = \R::findAll('cryptonews');
+      $news = $crypto->pagination($page,$total,$perpage,$page_cnt );
 
 
-      $this->set(compact('news'));
+
+      $this->set(compact('news','page_cnt','coins'));
    }
 
 

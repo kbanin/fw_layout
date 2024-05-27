@@ -42,7 +42,7 @@ class Main extends Model
             return "'$word'";
         }, $words);
          return  $topCripto;
-
+        
     }
 
 // Добавление данных
@@ -75,11 +75,8 @@ public function updateDateToDatabase ($titles, $links, $dates, $descriptions){
 
 }
 
- public function pagination ($page) {
+ public function pagination ($page, $total,$perpage,$page_cnt) {
 
-  $perpage = 25;
-  $total = \R::count('cryptonews');
-  $page_cnt = ceil( $total/$perpage);
   
   if($page<1){
     $page = 1;
@@ -87,8 +84,8 @@ public function updateDateToDatabase ($titles, $links, $dates, $descriptions){
 if ($page>$page_cnt) $page = $page_cnt;
     $start = ($page -1)*$perpage;
 
-    for($i=1;$i<$page_cnt;$i++){
-        echo "<a href='?page={$i}'>{$i}</a>";
-    }
+    
+    $news = \R::findAll('cryptonews',"LIMIT $start, $perpage ");
+    return $news;
  }
 }
