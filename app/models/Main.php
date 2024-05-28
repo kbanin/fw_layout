@@ -65,14 +65,21 @@ public function updateDateToDatabase ($titles, $links, $dates, $descriptions){
     $news = \R::findAll('cryptonews');
     foreach ($news as $index => $item) {
         
-        $item->title = array_shift($titles);
-        $item->description = array_shift($descriptions);
-        $item->dates = date('Y-m-d', strtotime(array_shift($dates)));
-        $item->links = array_shift($links);
+        if (!empty($titles)) {
+            $item->title = array_shift($titles);
+        }
+        if (!empty($descriptions)) {
+            $item->description = array_shift($descriptions);
+        }
+        if (!empty($dates)) {
+            $item->dates = date('Y-m-d', strtotime(array_shift($dates)));
+        }
+        if (!empty($links)) {
+            $item->links = array_shift($links);
+        }
         \R::store($item);
     }
     return $news;
-
 }
 
  public function pagination ($page, $total,$perpage,$page_cnt) {

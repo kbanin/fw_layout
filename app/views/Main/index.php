@@ -22,4 +22,17 @@
             <a href="<?=$item->links?>" class="news-link">Читать полностью</a>
         </div>
     <? endforeach ?>
+    <div id="pagination" class="pagination">
+        <!-- Пример кнопок пагинации -->
+          
+                <?for($i=1;$i<=$page_cnt;$i++):?>
+                 <a href="?page=<?php echo $i; ?>" class="btn btn-sm btn-link"><?php echo $i; ?></a>
+       
+        <!-- <button onclick="loadNews(1)" class="btn btn-sm btn-link">1</button>
+        <button onclick="loadNews(2)" class="btn btn-sm btn-link">2</button>
+        <button onclick="loadNews(3)" class="btn btn-sm btn-link">3</button> -->
+        <?endfor?>
+    </div>
 </div>
+<!-- Скрипт для AJAX запросов -->
+

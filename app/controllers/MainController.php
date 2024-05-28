@@ -14,14 +14,13 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 class MainController extends AppController
 {
-
+     
 
 
    public function indexAction()
    {
 
-
-
+       
       $crypto = new Main;
 
       $titles = [];
@@ -55,7 +54,7 @@ class MainController extends AppController
          }
       }
 
-
+ 
       //Сохранение данных новостей в БД таблицу cryptonews в случае добавление новой ссылки в массив rssUrls
 
       $expectedCount = count($crypto->rssUrls);
@@ -71,8 +70,9 @@ class MainController extends AppController
          // Сохраняем текущее значение в файл
          file_put_contents($file, $currentCount);
       } else { //Обновление данных (скрипт запускается каждый 6 часов с использованием cron)
-         
+        
          $crypto->updateDateToDatabase($titles, $links, $dates, $descriptions);
+         
       }
 
       $coins = $crypto->getCryptoArray();
@@ -96,7 +96,12 @@ class MainController extends AppController
 
 
    public function searchAction()
+
    {
+     
+      echo "Скрипт работает";
+
+
    }
 
    public function testAction()

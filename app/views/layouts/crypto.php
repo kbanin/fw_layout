@@ -14,17 +14,9 @@
 
     
     <?=$content?>
-    <div id="pagination" class="pagination">
-        <!-- Пример кнопок пагинации -->
-          
-                <?for($i=1;$i<=$page_cnt;$i++):?>
-                 <a href="?page=<?php echo $i; ?>" class="btn btn-sm btn-link"><?php echo $i; ?></a>
-       
-        <!-- <button onclick="loadNews(1)" class="btn btn-sm btn-link">1</button>
-        <button onclick="loadNews(2)" class="btn btn-sm btn-link">2</button>
-        <button onclick="loadNews(3)" class="btn btn-sm btn-link">3</button> -->
-        <?endfor?>
-    </div>
+    
+
+    
 </div>
 
 
@@ -32,5 +24,23 @@
 <!-- Подключение Bootstrap JS и Popper.js -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script>function loadNews() {
+   var selectedCrypto = $("#searchInput").val();
+   var searchUrl = "main/search?"+encodeURIComponent(selectedCrypto);
+   window.location.href = searchUrl;
+//    $.ajax({
+//        url: searchUrl,
+//        method: "GET",
+//        success: function(response) {
+//            // Обработка успешного ответа от сервера
+//            console.log(response);
+//            // Действия с полученными данными
+//        },
+//        error: function(xhr, status, error) {
+//            // Обработка ошибки AJAX-запроса
+//        }
+//    });
+}</script>
+
 </body> 
 </html>
