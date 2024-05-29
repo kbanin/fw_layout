@@ -9,7 +9,7 @@ class PageController extends AppController {
 
 
 
-    public function viewAction()
+    public function indexAction()
     {   
         $model = new Main();   
         $posts = \R::findAll('posts');

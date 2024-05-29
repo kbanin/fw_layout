@@ -53,7 +53,7 @@ class MainController extends AppController
             $descriptions[] = $description;
          }
       }
-
+  
  
       //Сохранение данных новостей в БД таблицу cryptonews в случае добавление новой ссылки в массив rssUrls
 
@@ -98,12 +98,20 @@ class MainController extends AppController
    public function searchAction()
 
    {
-     
-      echo "Скрипт работает";
+      if ($this->isAjax()) {
+        
+      $model = new Main();
 
+      if(isset($_GET['crypto'])) $coin = $_GET['crypto'] ;
 
+       $coinNews = \R::find('cryptonews', 'title LIKE ? OR description LIKE ?', ["%$coin%", "%$coin%"]);
+       
+       $coinNews = !empty($coinNews) ? $coinNews : '';
+
+      $this->set(compact('coinNews','coin'));
+      }
    }
-
+   
    public function testAction()
    {
    }
