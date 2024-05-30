@@ -6,6 +6,8 @@
     <title>Изучение JS</title>
 </head>
 <body>
+
+<button onclick="onClickButtton()" >Нажми на меня</button>
    
 <script src="/js/main.js"> </script>
 
