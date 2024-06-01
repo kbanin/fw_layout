@@ -9,7 +9,7 @@
 
 <body>
 
-    <form id="main-form"  method ="post">
+    <!-- <form id="main-form"  method ="post">
         <label for="name">Имя:</label>
         <input type="text" name="name" placeholder="Имя" id="name"><br><br>
         <label for="password">Пароль:</label>
@@ -24,7 +24,7 @@
         <div id="error" style = "color: red"></div>
         <input type="submit"  name="submit" value="готово">
 
-    </form>
+    </form> -->
 
     <script src="/js/main.js"> </script>
 

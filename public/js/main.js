@@ -242,41 +242,152 @@
 // }
 
 
-document.getElementById('main-form').addEventListener("submit",checkForm)
+// document.getElementById('main-form').addEventListener("submit",checkForm)
 
 
 
 
 
-function checkForm (event){
-console.log(event);
-event.preventDefault();
+// function checkForm (event){
+// console.log(event);
+// event.preventDefault();
 
-var el = document.getElementById('main-form');
+// var el = document.getElementById('main-form');
 
-var name = el.name.value;
-var pass = el.pass.value;
-var repass = el.repass.value;
-var state = el.state.value;
+// var name = el.name.value;
+// var pass = el.pass.value;
+// var repass = el.repass.value;
+// var state = el.state.value;
 
-var fail = "";
+// var fail = "";
 
-if (name ==""|| pass =="" || state == "" )
-   fail = "Заполните все поля" ;
-   else if(name.length<=1 || name.length>50 )
-   fail = "Введите корректное имя";
-   else if(pass != repass)
-   fail = "Пароли должны совпадать";
-   else if (pass.split("&").length>1)
-   fail = "Некорректный пароль";
+// if (name ==""|| pass =="" || state == "" )
+//    fail = "Заполните все поля" ;
+//    else if(name.length<=1 || name.length>50 )
+//    fail = "Введите корректное имя";
+//    else if(pass != repass)
+//    fail = "Пароли должны совпадать";
+//    else if (pass.split("&").length>1)
+//    fail = "Некорректный пароль";
 
-   if(fail != "")
-    {   document.getElementById('error').innerHTML = fail;
+//    if(fail != "")
+//     {   document.getElementById('error').innerHTML = fail;
 
     
-    }else{
-      alert("Все данные корректно заполнены");
-     window.location = 'https://habr.com/ru/news/818177/';
-    }
+//     }else{
+//       alert("Все данные корректно заполнены");
+//      window.location = 'https://habr.com/ru/news/818177/';
+//     }
    
-}
+// }
+
+
+
+
+
+
+// var id = setInterval(my_func,1000);
+// var counter = 0;
+
+// function my_func (){
+//  counter++;
+
+//  console.log ("Counter"+counter);
+   
+//  if (counter ==3)
+//     clearInterval(id);
+
+
+// setInterval(function(){
+//     counter++;
+//     console.log ("Прошло секунд :" + counter);
+// },1000);
+
+
+// setTimeout(function(){
+// console.log("Timer is working");
+// },2000);
+
+
+// var date = new Date ();
+
+// console.log (date.getFullYear());
+// console.log (date.getMonth()+1);
+// console.log (date.getDate());
+// console.log (date.getMinutes());
+// date.setHours(23);
+// date.setMinutes(23);
+// console.log("Время :"+ date.getHours()+":"+date.getMinutes());
+
+
+// console.log (arr.join(" & "));
+
+// var arr  = [60,50,4,0,5,6,7,8];
+
+// var stroka = arr.reverse().join(", ");
+
+
+// console.log (stroka.split(", "));
+
+
+// class Person {
+//    constructor(name,age,happines)
+//    {
+//      this.name = name;
+//      this.age = age;
+//      this.happines = happines;}
+
+
+//   info(){
+
+//     console.log("Человек :"+ this.name + ". Возраст :"+ this.age);
+//   }   
+
+//    }
+
+// var alex = new Person ("Jon",45,true);
+// var bob = new Person ("Bob",25,false);
+
+
+// alex.info();
+// bob.info();
+
+
+<h1 class="mb-4">Поиск новостей по криптовалютам</h1>
+    <div class="search-area mb-4">
+
+         <select id="searchInput" class="form-control">
+        <option value="">Выберите криптовалюту</option>
+        <?php foreach ($coins as $coin): ?>
+            <option value="<?php echo trim($coin,"'") ; ?>"><?php echo trim($coin,"'"); ?></option>
+        <?php endforeach; ?>
+    </select>
+        <button onclick="loadNews()" class="btn btn-primary mt-2">Поиск</button>
+    </div>
+<div id="newsResults" class="results">
+    <!-- Здесь будет примерный вид новости после загрузки через AJAX -->
+    <div class="text-center">
+        <h2><strong>Новости о биткоин, блокчейне и криптовалютах</strong></h2>
+    </div>
+    <? foreach ($news as $item) : ?>
+        <div class="news-item mb-3 p-2 border rounded">
+            <h4 class="news-title"><?= $item->title ?></h4>
+            <p class="news-description"><?= $item->dates?></p>
+            <p class="news-description"><?= $item->description?></p>
+            <a href="<?=$item->links?>" class="news-link">Читать полностью</a>
+        </div>
+    <? endforeach ?>
+    <div id="pagination" class="pagination">
+        <!-- Пример кнопок пагинации -->
+          
+                <!-- <?for($i=1;$i<=$page_cnt;$i++):?>
+                 <a href="?page=<?php echo $i; ?>" class="btn btn-sm btn-link"><?php echo $i; ?></a> -->
+       
+        <!-- <button onclick="loadNews(1)" class="btn btn-sm btn-link">1</button>
+        <button onclick="loadNews(2)" class="btn btn-sm btn-link">2</button>
+        <button onclick="loadNews(3)" class="btn btn-sm btn-link">3</button> -->
+        <!-- <?endfor?> -->
+    </div>
+</div>
+<!-- Скрипт для AJAX запросов -->
+

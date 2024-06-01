@@ -25,14 +25,56 @@
     <div id="pagination" class="pagination">
         <!-- Пример кнопок пагинации -->
           
-                <?for($i=1;$i<=$page_cnt;$i++):?>
-                 <a href="?page=<?php echo $i; ?>" class="btn btn-sm btn-link"><?php echo $i; ?></a>
-       
-        <!-- <button onclick="loadNews(1)" class="btn btn-sm btn-link">1</button>
-        <button onclick="loadNews(2)" class="btn btn-sm btn-link">2</button>
-        <button onclick="loadNews(3)" class="btn btn-sm btn-link">3</button> -->
-        <?endfor?>
+               
+        <button onclick="loadStr(1)" class="btn btn-sm btn-link">1</button>
+        <button onclick="loadStr(2)" class="btn btn-sm btn-link">2</button>
+        <button onclick="loadStr(3)" class="btn btn-sm btn-link">3</button>
+        <button onclick="loadStr(4)" class="btn btn-sm btn-link">4</button>
+        <button onclick="loadStr(5)" class="btn btn-sm btn-link">5</button>
+        <button onclick="loadStr(6)" class="btn btn-sm btn-link">6</button>
+        <button onclick="loadStr(7)" class="btn btn-sm btn-link">7</button>
+        <button onclick="loadStr(8)" class="btn btn-sm btn-link">8</button>
+        <button onclick="loadStr(9)" class="btn btn-sm btn-link">9</button>
+        
+     
     </div>
 </div>
 <!-- Скрипт для AJAX запросов -->
+<script>
+    function loadStr(page) {
+    $.ajax({
+      url: '/main/pagination',
+      type: 'GET',
+      data: { page: page },
+      dataType: 'html',
+      success: function(response) {
 
+        console.log(response);
+        // Обработка успешного ответа от сервера
+        $('#newsResults').html(response);
+      },
+      error: function(xhr, status, error) {
+        // Обработка ошибки
+        console.error(error);
+      }
+    });
+  }
+</script>
+<script>function loadNews() {
+    var selectedCrypto = $("#searchInput").val();
+
+    // Выполнить AJAX запрос для загрузки данных
+    $.ajax({
+        url: "/main/search",
+        method: "GET",
+        data: { crypto: selectedCrypto },
+        success: function(response) {
+            // Обновить содержимое элемента <div> с результатами новостей
+            $("#newsResults").html(response);
+        },
+        error: function() {
+            // Обработать ошибку
+            // ...
+        }
+    });
+}</script>

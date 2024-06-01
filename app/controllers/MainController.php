@@ -14,13 +14,13 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 class MainController extends AppController
 {
-     
+
 
 
    public function indexAction()
    {
 
-       
+
       $crypto = new Main;
 
       $titles = [];
@@ -35,7 +35,7 @@ class MainController extends AppController
          $rss = simplexml_load_file($rssUrl);
 
 
-         
+
 
          foreach ($rss->channel->item as $item) {
 
@@ -53,15 +53,15 @@ class MainController extends AppController
             $descriptions[] = $description;
          }
       }
-  
- 
+
+
       //Сохранение данных новостей в БД таблицу cryptonews в случае добавление новой ссылки в массив rssUrls
 
       $expectedCount = count($crypto->rssUrls);
       $file = ROOT . '/count.txt';
       $currentCount = file_exists($file) ? (int)file_get_contents($file) : 0; // начальное значение
-      
-      
+
+
       if ($expectedCount > $currentCount) {
          \R::wipe('cryptonews');
 
@@ -70,27 +70,26 @@ class MainController extends AppController
          // Сохраняем текущее значение в файл
          file_put_contents($file, $currentCount);
       } else { //Обновление данных (скрипт запускается каждый 6 часов с использованием cron)
-        
+
          $crypto->updateDateToDatabase($titles, $links, $dates, $descriptions);
-         
       }
 
       $coins = $crypto->getCryptoArray();
-      
-      
+
+
       $perpage = 25;
-      $page = isset ($_GET['page']) ? (int)$_GET['page']:1;
-      $total= \R::count('cryptonews');
-      
-      $page_cnt = ceil( $total/$perpage);
-     
-      
+      $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+      $total = \R::count('cryptonews');
 
-      $news = $crypto->pagination($page,$total,$perpage,$page_cnt );
+      $page_cnt = ceil($total / $perpage);
 
 
 
-      $this->set(compact('news','page_cnt','coins'));
+      $news = $crypto->pagination($page, $total, $perpage, $page_cnt);
+
+
+
+      $this->set(compact('news', 'page_cnt', 'coins'));
    }
 
 
@@ -99,20 +98,42 @@ class MainController extends AppController
 
    {
       if ($this->isAjax()) {
-        
-      $model = new Main();
 
-      if(isset($_GET['crypto'])) $coin = $_GET['crypto'] ;
+         $model = new Main();
 
-       $coinNews = \R::find('cryptonews', 'title LIKE ? OR description LIKE ?', ["%$coin%", "%$coin%"]);
-       
-       $coinNews = !empty($coinNews) ? $coinNews : '';
+         if (isset($_GET['crypto'])) $coin = $_GET['crypto'];
 
-      $this->set(compact('coinNews','coin'));
+         $coinNews = \R::find('cryptonews', 'title LIKE ? OR description LIKE ?', ["%$coin%", "%$coin%"]);
+
+         $coinNews = !empty($coinNews) ? $coinNews : '';
+
+         $this->set(compact('coinNews', 'coin'));
       }
    }
-   
-   public function testAction()
+
+   public function paginationAction()
    {
+      if ($this->isAjax()) {
+
+         
+         $crypto = new Main();
+
+
+
+         $perpage = 25;
+         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+         
+         $total = \R::count('cryptonews');
+
+         $page_cnt = ceil($total / $perpage);
+
+
+
+         $news = $crypto->pagination($page, $total, $perpage, $page_cnt);
+
+         
+
+         $this->loadView ('index',compact('news', 'page_cnt'));
+      }
    }
 }
