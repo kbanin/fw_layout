@@ -39,42 +39,4 @@
      
     </div>
 </div>
-<!-- Скрипт для AJAX запросов -->
-<script>
-    function loadStr(page) {
-    $.ajax({
-      url: '/main/pagination',
-      type: 'GET',
-      data: { page: page },
-      dataType: 'html',
-      success: function(response) {
 
-        console.log(response);
-        // Обработка успешного ответа от сервера
-        $('#newsResults').html(response);
-      },
-      error: function(xhr, status, error) {
-        // Обработка ошибки
-        console.error(error);
-      }
-    });
-  }
-</script>
-<script>function loadNews() {
-    var selectedCrypto = $("#searchInput").val();
-
-    // Выполнить AJAX запрос для загрузки данных
-    $.ajax({
-        url: "/main/search",
-        method: "GET",
-        data: { crypto: selectedCrypto },
-        success: function(response) {
-            // Обновить содержимое элемента <div> с результатами новостей
-            $("#newsResults").html(response);
-        },
-        error: function() {
-            // Обработать ошибку
-            // ...
-        }
-    });
-}</script>
