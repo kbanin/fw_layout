@@ -4,95 +4,57 @@ namespace app\models;
 
 use app\controllers\MainController;
 use fw\core\base\Model;
+use fw\libs\Pagination;
+use fw\core\base\View;
 
 
 class Main extends Model
 {
-    public $rssUrls = array(
-        'https://coinspot.io/feed/',
-        'https://ru.investing.com/rss/news_301.rss',
-        'https://cryptocurrency.tech/feed/',
-        'https://bits.media/rss2/',
-        'https://cryptofeed.ru/feed/',
-        'https://ru.beincrypto.com/feed/',
-        'https://2bitcoins.ru/feed/',
-        'https://happycoin.club/feed/',
-        'https://altcoinlog.com/feed/',
-        'https://decrypt.co/feed',
-        'https://dailyhodl.com/feed/',
-        
-        
-      
-    );
 
     
 
-    public function getCryptoArray()
+
+
+    public function getArray()
     {
 
-        $initialData = "Bitcoin, Ethereum, Ripple, Litecoin, Bitcoin Cash,Cardano,Solana, Polkadot, Dogecoin, Chainlink,Binance Coin, Tether, Avalanche,Terra, Uniswap,Algorand, Wrapped Bitcoin, Polygon, Stellar,Cosmos,Internet Computer, VeChain, Ethereum Classic,Filecoin, Theta Network,TRON, FTX Token, Dai, Tezos,EOS, Monero, Aave, The Graph, Klaytn,Neo, Kusama, IOTA,PancakeSwap, Maker, Crypto.com Coin, Bitcoin SV,BitTorrent,Shiba Inu, Alchemix, Axie Infinity, TerraUSD, Hedera, THORChain,Decentraland";
+        $listCoins = ("Bitcoin, Ethereum, Ripple, Litecoin, Bitcoin Cash, Cardano, Solana,
+    Polkadot, Dogecoin, Chainlink, Binance Coin, Tether, Avalanche, Terra, Uniswap,
+    Algorand, Wrapped Bitcoin, Polygon, Stellar, Cosmos, Internet Computer, VeChain,
+    Ethereum Classic, Filecoin, Theta Network, TRON, FTX Token, Dai, Tezos, EOS, Monero,
+    Aave, The Graph, Klaytn, Neo, Kusama, IOTA, PancakeSwap, Maker, Crypto.com Coin,
+    Bitcoin SV, BitTorrent, Shiba Inu, Alchemix, Axie Infinity, TerraUSD, Hedera,THORChain,Decentraland");
 
 
-        // Разделение строки на слова
-        $words = explode(',', $initialData);
+        // разделяем строку на массив с помощью функции explode()
+        $cryptoArr = explode(',', $listCoins);
 
+        // удаляем пробелы и переходы строк из элементов массива с помощью функции trim()
+        $cryptoArr = array_map('trim', $cryptoArr);
 
-        // Создание нового массива с обернутыми в одинарные кавычки словами
-        $topCripto = array_map(function ($word) {
-            return "'$word'";
-        }, $words);
-         return  $topCripto;
-        
+        return $cryptoArr;
+       
+     
     }
 
-// Добавление данных
-    public function addDataToDatabase($titles, $links, $dates, $descriptions)
-    {       
-           foreach ($titles as $index=>$title){
-            $news = \R::dispense('cryptonews');
-            $news->title = $title;
-            $news->description = $descriptions[$index];
-            $news->dates = date('Y-m-d', strtotime($dates[$index]));
-            $news->links = $links[$index];
-            \R::store($news);
 
-           }
-           return $news;
-}
+    public function addNews($coin,$item,$linkCoin,$presentDayTime){
 
-//Обновление данных
-public function updateDateToDatabase ($titles, $links, $dates, $descriptions){
-    $news = \R::findAll('cryptonews');
-    foreach ($news as $index => $item) {
-        
-        if (!empty($titles)) {
-            $item->title = array_shift($titles);
-        }
-        if (!empty($descriptions)) {
-            $item->description = array_shift($descriptions);
-        }
-        if (!empty($dates)) {
-            $item->dates = date('Y-m-d', strtotime(array_shift($dates)));
-        }
-        if (!empty($links)) {
-            $item->links = array_shift($links);
-        }
-        \R::store($item);
-    }
-    return $news;
-}
+       
+            $cryptoNews = \R::dispense('cryptonews');
+            $cryptoNews->coin = $coin;
+            $cryptoNews->rss_link = $linkCoin;
+            $cryptoNews->title = $item->title;
+            $cryptoNews->links = $item->link;
+            $cryptoNews->pub_date = date_create_from_format('D, d M Y H:i:s e', $item->pubDate)->format('Y-m-d H:i:s');
+            $cryptoNews->description = $item->description;
+            $cryptoNews->guid = $item->guid;
+            $cryptoNews->date_added = $presentDayTime->format('Y-m-d H:i:s');
 
- public function pagination ($page, $total,$perpage,$page_cnt) {
+            \R::store($cryptoNews);
 
-  
-  if($page<1){
-    $page = 1;
-  }
-if ($page>$page_cnt) $page = $page_cnt;
-    $start = ($page -1)*$perpage;
+
 
     
-    $news = \R::findAll('cryptonews',"LIMIT $start, $perpage ");
-    return $news;
- }
+}
 }

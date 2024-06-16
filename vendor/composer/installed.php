@@ -3,7 +3,7 @@
         'name' => 'fw/fw',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '7308d38ef17d914db060e9fe9697ee9ee510fd65',
+        'reference' => '61889323565bb40308c1a4b88387aae05a0b3bcc',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'fw/fw' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '7308d38ef17d914db060e9fe9697ee9ee510fd65',
+            'reference' => '61889323565bb40308c1a4b88387aae05a0b3bcc',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

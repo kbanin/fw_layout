@@ -1,16 +1,15 @@
- <!-- Здесь будет примерный вид новости после загрузки через AJAX -->
- <div class="text-center">
-     <h2><strong>Новости <?= isset($coin) ? $coin : '' ?></strong></h2>
- </div>
- <?if ($coinNews =='' ):?>
-    <p>Новости по криптовалюте отсутствуют!</p>
-    <?else:?>
- <? foreach ($coinNews as $news) : ?>
-     <div class="news-item mb-3 p-2 border rounded">
-         <h4 class="news-title"><?= $news->title ?></h4>
-         <p class="news-description"><?= $news->dates ?></p>
-         <p class="news-description"><?= $news->description ?></p>
-         <a href="<?= $news->links ?>" class="news-link">Читать полностью</a>
-     </div>
- <? endforeach ?>
- <?endif?>
+<div class="mt-4">
+    <div class="text-center">
+        <?=$countPageNews?> Новостей из <?=$total?>
+        <br>
+        <br>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div id="pagination" class="pagination">
+            <? for ($i=1;$i<=ceil($total/$perpage);$i++): ?>
+            <button onclick="loadNews(<?=$i?>)" class="btn btn-sm btn-link"><?=$i?></button>
+            
+            <?endfor?>
+        </div>
+    </div>
+</div>

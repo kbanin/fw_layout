@@ -1,8 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Новости Криптовалют</title>
@@ -13,12 +12,19 @@
 </head>
 <body>
 <div class="container mt-5">
+    <h1 class="mb-4">Поиск новостей по криптовалютам</h1>
+    <div class="search-area mb-4">
+        <input type="text" id="searchInput" class="form-control" placeholder="Введите название криптовалюты...">
+        <button onclick="loadNews()" class="btn btn-primary mt-2">Поиск</button>
+    </div>
 
-    
+    <div id="newsResults" class="results">
+     
+        <!-- Здесь будет примерный вид новости после загрузки через AJAX -->
+      
+    </div>
     <?=$content?>
-    
-
-    
+   
 </div>
 
 
@@ -26,48 +32,30 @@
 <!-- Подключение Bootstrap JS и Popper.js -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-</script>
-<script>function loadNews() {
-    var selectedCrypto = $("#searchInput").val();
+<script>function loadNews(pageNumber) {
+  // Получаем значение из поля ввода
+  var searchQuery = document.getElementById("searchInput").value;
 
-    // Выполнить AJAX запрос для загрузки данных
-    $.ajax({
-        url: "/main/search",
-        method: "GET",
-        data: { crypto: selectedCrypto },
-        success: function(response) {
-            // Обновить содержимое элемента <div> с результатами новостей
-            $("#newsResults").html(response);
-        },
-        error: function() {
-            // Обработать ошибку
-            // ...
-        }
-    });
-}</script>
-<!-- Скрипт для AJAX запросов -->
-<script>
-    function loadStr(page) {
-    $.ajax({
-      url: '/main/pagination',
-      type: 'GET',
-      data: { page: page },
-      dataType: 'html',
-      success: function(response) {
-
-        
-        // Обработка успешного ответа от сервера
-        $('#newsResults').html(response);
-      },
-      error: function(xhr, status, error) {
-        // Обработка ошибки
-        console.error(error);
-      }
-    });
-  }
+  // Отправляем AJAX-запрос на сервер
+  $.ajax({
+    url: "/main/search", // URL страницы контроллера
+    type: "GET",
+    data: { query: searchQuery,page:pageNumber }, // Передаем параметр запроса
+    success: function (response) {
+        $("#newsResults").html(response);
+    },
+    error: function (xhr, status, error) {
+      // Обработка ошибки
+      console.log(error);
+    },
+  });
+}
 </script>
 
 
 
-</body> 
+</body>
 </html>
+
+
+
