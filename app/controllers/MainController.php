@@ -24,7 +24,7 @@ class MainController extends AppController
     public function indexAction()
     { 
         
-       
+       //Код запускатеся через cron каждые 6 часов . Код находится в app/controllers/console/ConsoleController.php
      
         
     }
